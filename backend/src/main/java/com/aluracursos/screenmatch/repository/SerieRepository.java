@@ -14,7 +14,10 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
 
     List<Serie> findTop5ByOrderByEvaluacionDesc();
     List<Serie> findByGenero(Categoria categoria);
-    //List<Serie> findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(int totalTemporadas, Double evaluacion);
+
+    // Utilizamos JPQL que es la manera mas segura de traer los datos
+    @Query("SELECT s FROM Serie s " + "JOIN s.episodios e " + "GROUP BY s " + "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
+    List<Serie> lanzamientosMasRecientes();
 
     @Query("SELECT s FROM Serie s WHERE s.totalTemporadas <= :totalTemporadas AND s.evaluacion >= :evaluacion")
     List<Serie> seriesPorTemparadaYEvaluacion(int totalTemporadas, Double evaluacion);
