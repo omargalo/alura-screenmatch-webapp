@@ -9,7 +9,7 @@ public class ConsultaChatGPT {
 
         CompletionRequest requisicion = CompletionRequest.builder()
                 .model("gpt-3.5-turbo-instruct")
-                .prompt("Traduce al español de México en tono chilango el siguiente texto: " + texto)
+                .prompt("Traduce al español de México en tono chilango sin grocerias el siguiente texto: " + texto)
                 .maxTokens(1000)
                 .temperature(0.7)
                 .build();
